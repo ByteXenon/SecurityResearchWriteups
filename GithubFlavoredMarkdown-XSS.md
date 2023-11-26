@@ -2,10 +2,10 @@
 
 ### Executive Summary
 - **Date of Discovery:** October 8, 2023
-- **Date of Resolution:** October 15, 2023
 - **Date of Initial Report:** October 10, 2023
+- **Date of Resolution:** October 15, 2023
 - **Identified By:** Luna Davis ([Bytexenon](https://github.com/Bytexenon))
-- **Classification of Vulnerability:** Cross-Site Scripting (XSS)
+- **Classification of Vulnerability:** CSS Injection 
 - **Services Impacted:** Github (https://github.com/), Github-Favored Markdown (https://github.github.com/gfm/)
 - **Extent of Impact:** The vulnerability has a broad reach, affecting multiple URL patterns on GitHub. This includes user and organization profiles, repository main pages, individual issue pages, and Markdown files within any repository. The specific patterns that are impacted include:
   - `https://github.com/<user,organization>` (If a malicious `README.md` exists in the user or organization's repository)
@@ -20,11 +20,11 @@
 
 ### Description
 
-Github's markdown parser, known as cmark, allows for the use of HTML tags to enhance the formatting of the markdown. However, for security reasons, it restricts the use of certain attributes such as style and script to prevent potential Cross-Site Scripting (XSS) attacks. Despite these restrictions, I discovered a bypass that allows the style attribute to be used within an `<img>` element, but only when this element is nested inside any header (`<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`) element. This bypass can be exploited to apply arbitrary CSS styles to the image, potentially leading to various forms of visual manipulation on the rendered page.
+Github's markdown parser, known as cmark, allows for the use of HTML tags to enhance the formatting of the markdown. However, for security reasons, it restricts the use of certain attributes such as style and script to prevent potential Cross-Site Scripting (XSS) and CSS Injection attacks. Despite these restrictions, I discovered a bypass that allows the style attribute to be used within an `<img>` element, but only when this element is nested inside any header (`<h1>`, `<h2>`, `<h3>`, `<h4>`, `<h5>`, `<h6>`) element. This bypass can be exploited to apply arbitrary CSS styles to the image, potentially leading to various forms of visual manipulation on the rendered page.
 
 ### Discovery
 
-While experimenting with Github's markdown parser to enhance the aesthetics of my profile's README.md file, I discovered that HTML tags were permissible in their markdown. This is a common feature in most markdown parsers to allow for more complex formatting. However, what caught my attention was the ability to use the style attribute within nested `<img>` elements that were inside any header elements. This was an unexpected behavior as the style attribute is typically restricted to prevent potential XSS attacks.
+While experimenting with Github's markdown parser to enhance the aesthetics of my profile's README.md file, I discovered that HTML tags were permissible in their markdown. This is a common feature in most markdown parsers to allow for more complex formatting. However, what caught my attention was the ability to use the style attribute within nested `<img>` elements that were inside any header elements. This was an unexpected behavior as the style attribute is typically restricted to prevent potential XSS/CSS-Injection attacks.
 
 To validate this finding, I created a simple HTML page with a nested `<img>` element inside a header element and applied a style attribute to it. I then uploaded this HTML content to my Github profile's README.md file. To my surprise, the style attribute was successfully rendered, allowing me to apply arbitrary CSS styles to the image.
 
@@ -69,7 +69,7 @@ The name of the security engineer has been redacted for privacy reasons.
 
 [My profile](https://web.archive.org/web/20231009182556/https://github.com/ByteXenon)
 
-This page was archived after the vulnerability was reported, but before it was resolved. It shows the exploit in action. The page has since been updated to remove the exploit, and it was never used for malicious purposes (at least not by me).
+This page was archived after the vulnerability was reported, but before it was resolved. It shows the exploit in action. My profile page has since been updated to remove the exploit, and the exploit was never used for malicious purposes as far as I know (which is really fortunate, because it would have been very easy to do so)
 
 ### Closing Thoughts
 
