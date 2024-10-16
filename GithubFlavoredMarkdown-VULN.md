@@ -4,9 +4,9 @@
 - **Date of Discovery:** October 8, 2023
 - **Date of Initial Report:** October 10, 2023
 - **Date of Resolution:** October 15, 2023
-- **Identified By:** Luna Davis ([Bytexenon](https://github.com/Bytexenon))
+- **Identified By:** ([Bytexenon](https://github.com/Bytexenon))
 - **Classification of Vulnerability:** CSS Injection 
-- **Services Impacted:** Github (https://github.com/), Github-Favored Markdown (https://github.github.com/gfm/)
+- **Services Impacted:** Github (https://github.com/), Github-Flavored Markdown (https://github.github.com/gfm/)
 - **Extent of Impact:** The vulnerability has a broad reach, affecting multiple URL patterns on GitHub. This includes user and organization profiles, repository main pages, individual issue pages, and Markdown files within any repository. The specific patterns that are impacted include:
   - `https://github.com/<user,organization>` (If a malicious `README.md` exists in the user or organization's repository)
   - `https://github.com/<user,organization>/<repository>` (If the repository has a malicious `README.md` file)
